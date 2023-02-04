@@ -111,3 +111,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                   KC_NO, KC_NO, KC_NO,          KC_NO, KC_ENT,   KC_SPC
  )
 };
+
+enum combos {
+ CtrlR,
+ CtrlP,
+ AltDot,
+};
+
+const uint16_t PROGMEM ctrlR_combo[] = { KC_Q, KC_R, COMBO_END};
+const uint16_t PROGMEM ctrlP_combo[] = { KC_Q, KC_P, COMBO_END};
+const uint16_t PROGMEM altDot_combo[] = { KC_COMMA, KC_DOT, COMBO_END};
+
+combo_t key_combos[COMBO_COUNT] = {
+    COMBO(ctrlR_combo, RCTL(KC_R)),
+    COMBO(ctrlP_combo, LCTL(KC_P)),
+    COMBO(altDot_combo, LALT(KC_DOT)),
+};
+
