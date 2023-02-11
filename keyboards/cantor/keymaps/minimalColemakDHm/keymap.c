@@ -9,6 +9,10 @@
 #define _NUMWORD 3
 #define _I3 4
 
+enum custom_keycodes {
+ LAYERWORD,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_split_3x6_3(
      /*
@@ -100,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       * │ShQ│   │   │   │   │Sh │       │   │ / │ = │ - │ \ │   │
       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
       *               ┌───┐                   ┌───┐
-      *               │   ├───┐           ┌───┤   │
+      *               │   ├───┐           ┌───┤Esc│
       *               └───┤   ├───┐   ┌───┤Spc├───┘
       *                   └───┤   │   │Ent├───┘
       *                       └───┘   └───┘
@@ -108,7 +112,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_PAUS,    KC_1, KC_2,  KC_3,  KC_4,  KC_0,           KC_F6, KC_F7,    KC_F8,   KC_F9,    KC_F10,   KC_F11,
          KC_NO,      KC_A, KC_R,  KC_F,  MT(MOD_RSFT, KC_T),  RSFT(KC_EQUAL),    KC_F1, MT(MOD_LSFT, KC_LEFT),  KC_DOWN, KC_UP,    KC_RIGHT, KC_F12,
          RSFT(KC_Q), KC_X, KC_NO, KC_NO, KC_NO, RSFT(KC_SPC),   KC_NO, KC_SLASH, KC_EQUAL,   KC_MINUS, KC_BSLS,  KC_NO,
-                                  KC_NO, KC_NO, KC_NO,          KC_ENT,   KC_SPC, KC_NO
+                                  KC_NO, KC_NO, KC_NO,          KC_ENT,   KC_SPC, KC_ESC
  )
 };
 
