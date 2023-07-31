@@ -7,6 +7,6 @@
 #undef TAPPING_TERM
 #define TAPPING_TERM 190
 
-#define COMBO_COUNT 3
+#define COMBO_COUNT 4
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
