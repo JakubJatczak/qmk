@@ -12,6 +12,8 @@
 enum custom_keycodes {
  LAYERWORD,
 };
+static uint16_t num_word_timer = 0;
+static bool is_num_word_on = false;
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_DEFAULT] = LAYOUT_split_3x6_3(
@@ -114,6 +116,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          RSFT(KC_Q), KC_X, KC_NO, KC_NO, KC_NO, RSFT(KC_SPC),   KC_NO, KC_SLASH, KC_EQUAL,   KC_MINUS, KC_BSLS,  KC_NO,
                                   KC_NO, KC_NO, KC_NO,          KC_ENT,   KC_SPC, KC_ESC
  )
+enum userspace_custom_keycodes {
+    NUMWORD,
 };
 
 enum combos {
@@ -125,6 +129,106 @@ enum combos {
 const uint16_t PROGMEM ctrlR_combo[] = { KC_Q, KC_R, COMBO_END};
 const uint16_t PROGMEM ctrlP_combo[] = { KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM altDot_combo[] = { KC_COMMA, KC_DOT, COMBO_END};
+__attribute__ ((weak))
+bool process_record_user_kb(uint16_t keycode, keyrecord_t *record) {
+    return true;
+}
+
+void enable_num_word(void) {
+    if(is_num_word_on) 
+    {
+        return;
+    }
+    is_num_word_on = true;
+    layer_on(_NUMWORD);
+}
+
+void disable_num_word(void) {
+    if(!is_num_word_on) 
+    {
+        return;
+    }
+    is_num_word_on = false;
+    layer_off(_NUMWORD);
+}
+
+void toggle_num_word(void) {
+    if (is_num_word_on) {
+        disable_num_word();
+    }
+    else {
+        enable_num_word();
+    }
+}
+
+bool should_terminate_num_word(uint16_t keycode, const keyrecord_t *record) {
+    switch (keycode) {
+        case KC_1 ... KC_0:
+        case KC_COMM:
+        case KC_DOT:
+        case KC_X:
+        // Misc
+        case KC_UNDS:
+        case KC_BSPC:
+            return false;
+        default:
+            return true;
+    }
+
+    // Should be unreachable
+    return false;
+}
+
+bool process_record_num_word(uint16_t keycode, const keyrecord_t *record) {
+    // Handle the custom keycodes that go with this feature
+    if (keycode == NUMWORD) {
+        if (record->event.pressed) {
+            enable_num_word();
+            num_word_timer = timer_read();
+            return false;
+        }
+        else {
+            if (timer_elapsed(num_word_timer) > TAPPING_TERM) {
+                // If the user held the key longer than TAPPING_TERM,
+                // consider it a hold, and disable the behavior on
+                // key release.
+                disable_num_word();
+                return false;
+            }
+        }
+    }
+
+    // Other than the custom keycodes, nothing else in this feature will
+    // activate if the behavior is not on, so allow QMK to handle the
+    // event as usual
+    if (!is_num_word_on) return true;
+
+    // Nothing else acts on key release, either
+    if (!record->event.pressed) {
+        return true;
+    }
+
+    if (should_terminate_num_word(keycode, record)) {
+        disable_num_word();
+    }
+
+    return true;
+}
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch(keycode) {
+        case LT(_I3, KC_NO):
+            if(record->tap.count && record->event.pressed) {
+                enable_num_word();
+                return false;
+            }
+    }
+    // returns true if the QMK should handle the keycode normally and false if it is already handled
+    if (!process_record_num_word(keycode, record)) {
+        return false;
+    }
+    return process_record_user_kb(keycode, record);
+}
 const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
