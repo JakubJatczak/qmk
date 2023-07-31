@@ -224,10 +224,12 @@ const uint16_t PROGMEM ctrlR_combo[]  = {KC_Q, KC_R, COMBO_END};
 const uint16_t PROGMEM ctrlP_combo[]  = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
+const uint16_t PROGMEM apostropheCombo[] = {KC_U, KC_Y, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(ctrlR_combo, RCTL(KC_R)),
     COMBO(ctrlP_combo, LCTL(KC_P)),
     COMBO(altDot_combo, LALT(KC_DOT)),
     COMBO(ctrlShiftV_combo, LSFT(LCTL(KC_V))),
+    COMBO(apostropheCombo, KC_QUOTE),
 };
