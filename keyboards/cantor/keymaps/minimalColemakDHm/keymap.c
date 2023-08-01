@@ -26,7 +26,7 @@ enum combos {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │DEL│ Q │ W │ F │ P │ B │       │ J │ L │ U │ Y │ : │ ' │
+       * │   │ Q │ W │ F │ P │ B │       │ J │ L │ U │ Y │ : │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
        * │Sht│ A │ R │ S │ T │ G │       │ M │ N │ E │ I │ O │Sft│
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
@@ -38,7 +38,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                   └───┤Bsp│   │Tab├───┘
        *                       └───┘   └───┘
        */
-                   KC_DEL, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_QUOTE,
+                   KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    OSM(MOD_LSFT), KC_A, KC_R, KC_S, KC_T,     KC_G, KC_M, KC_N, KC_E, KC_I, KC_O, OSM(MOD_RSFT),
                    KC_LCTL, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL,
          LT(_I3, KC_NO), LT(_DIGITS, KC_SPC), KC_BSPC,      KC_TAB, LT(_SYMBOL, KC_ENT), MT(MOD_RALT, KC_ESC)),
@@ -225,6 +225,7 @@ const uint16_t PROGMEM ctrlP_combo[]  = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
 const uint16_t PROGMEM apostropheCombo[] = {KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM deleteCombo[] = {KC_Q, KC_W, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(ctrlR_combo, RCTL(KC_R)),
@@ -232,4 +233,5 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
     COMBO(ctrlShiftV_combo, LSFT(LCTL(KC_V))),
     COMBO(apostropheCombo, KC_QUOTE),
+    COMBO(deleteCombo, KC_DEL),
 };
