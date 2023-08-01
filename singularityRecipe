@@ -2,4 +2,7 @@ Bootstrap: docker
 From: qmkfm/qmk_cli
 Stage: spython-base
 
+%runscript
+    qmk flash -kb cantor -km minimalColemakDHm
+
 
