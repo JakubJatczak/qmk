@@ -2,12 +2,29 @@
 // SPDX-License-Identifier: GPL-2.0
 
 #include QMK_KEYBOARD_H
+#include "keycodes.h"
+#include "features/achordion.h"
 
 #define _DEFAULT 0
 #define _SYMBOL 1
 #define _DIGITS 2
 #define _NUMWORD 3
 #define _I3 4
+
+// Left-hand home row mods
+#define HOME_A LGUI_T(KC_A)
+#define HOME_R LALT_T(KC_R)
+#define HOME_S LCTL_T(KC_S)
+#define HOME_T LSFT_T(KC_T)
+#define HOME_W RALT_T(KC_W)
+
+// Right-hand home row mods
+#define HOME_N RSFT_T(KC_N)
+#define HOME_E RCTL_T(KC_E)
+#define HOME_I LALT_T(KC_I)
+#define HOME_O RGUI_T(KC_O)
+#define HOME_Y RALT_T(KC_Y)
+
 
 static uint16_t num_word_timer = 0;
 static bool is_num_word_on = false;
@@ -28,9 +45,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
        * │   │ Q │ W │ F │ P │ B │       │ J │ L │ U │ Y │ : │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │Sht│ A │ R │ S │ T │ G │       │ M │ N │ E │ I │ O │Sft│
+       * │   │ A │ R │ S │ T │ G │       │ M │ N │ E │ I │ O │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │Ctl│ Z │ X │ C │ D │ V │       │ K │ H │ , │ . │ / │Ctl│
+       * │   │ Z │ X │ C │ D │ V │       │ K │ H │ , │ . │ / │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
        *               │GUI├───┐           ┌───┤AlG│
@@ -38,9 +55,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                   └───┤Bsp│   │Tab├───┘
        *                       └───┘   └───┘
        */
-                   KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
-                   OSM(MOD_LSFT), KC_A, KC_R, KC_S, KC_T,     KC_G, KC_M, KC_N, KC_E, KC_I, KC_O, OSM(MOD_RSFT),
-                   KC_LCTL, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_RCTL,
+                   KC_NO, KC_Q, HOME_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, HOME_Y, KC_COLN, KC_NO,
+                   KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
+                   KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
          LT(_I3, KC_NO), LT(_DIGITS, KC_SPC), KC_BSPC,      KC_TAB, LT(_SYMBOL, KC_ENT), MT(MOD_RALT, KC_ESC)),
   [_SYMBOL] = LAYOUT_split_3x6_3(
       /*
@@ -202,7 +219,37 @@ bool process_record_num_word(uint16_t keycode, const keyrecord_t *record) {
     return true;
 }
 
+bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record)
+{
+    switch(tap_hold_keycode)
+    {
+        case HOME_A:
+        case HOME_R:
+        case HOME_S:
+        case HOME_T:
+        case HOME_W:
+        case HOME_N:
+        case HOME_E:
+        case HOME_I:
+        case HOME_O:
+            break;
+        case HOME_Y:
+            // special case for the apostropheCombo
+            if(other_keycode == KC_U)
+            {
+                return false;
+            }
+            break;
+        default:
+            return true;
+    }
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if(!process_achordion(keycode, record)) {
+        return false;
+    }
     switch(keycode) {
         case LT(_I3, KC_NO):
             if(record->tap.count && record->event.pressed) {
@@ -217,12 +264,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return process_record_user_kb(keycode, record);
 }
 
+void matrix_scan_user(void) {
+  achordion_task();
+}
+
 const uint16_t PROGMEM ctrlR_combo[]  = {KC_Q, KC_R, COMBO_END};
 const uint16_t PROGMEM ctrlP_combo[]  = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
 const uint16_t PROGMEM apostropheCombo[] = {KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM deleteCombo[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM altCombo[] = {KC_LCTL, KC_LSFT, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(ctrlR_combo, RCTL(KC_R)),
@@ -231,4 +283,5 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(ctrlShiftV_combo, LSFT(LCTL(KC_V))),
     COMBO(apostropheCombo, KC_QUOTE),
     COMBO(deleteCombo, KC_DEL),
+    COMBO(altCombo, OSM(MOD_LALT)),
 };
