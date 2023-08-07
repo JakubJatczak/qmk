@@ -8,7 +8,6 @@
 // Tap-hold configuration for home row mods.
 #define TAPPING_TERM 180
 #define PERMISSIVE_HOLD
-
-#define COMBO_COUNT 7
+#define COMBO_COUNT 8
 
 #define BOTH_SHIFTS_TURNS_ON_CAPS_WORD

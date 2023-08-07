@@ -37,6 +37,11 @@ enum combos {
     CtrlR,
     CtrlP,
     AltDot,
+    ctrlShiftV,
+    apostrophe,
+    delete,
+    alt,
+    capsWord,
 };
 
 
@@ -136,13 +141,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
       KC_NO, LGUI(KC_A), LGUI(KC_R), LGUI(KC_F), MT((MOD_RSFT), LGUI(KC_T)), LGUI(RSFT(KC_EQUAL)), LGUI(KC_F1), LGUI(KC_LEFT), LGUI(KC_DOWN), LGUI(KC_UP), LGUI(KC_RIGHT), LGUI(KC_F12),
       LGUI(RSFT(KC_Q)), LGUI(KC_X), KC_NO, KC_NO, KC_NO, LGUI(RSFT(KC_SPC)), KC_NO, LGUI(KC_SLASH), LGUI(KC_EQUAL), LGUI(KC_MINUS), LGUI(KC_BSLS), KC_NO, KC_NO, KC_NO, KC_NO, LGUI(KC_ENT), LGUI(KC_SPC), LGUI(KC_ESC)
 )};
+
 __attribute__ ((weak))
 bool process_record_user_kb(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+bool get_combo_must_tap(uint16_t index,combo_t *combo) {
+    return true;
+}
+
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    if(combo_index == capsWord) {
+        if(pressed) {
+            caps_word_on();
+        }
+    }
+}
+
 void enable_num_word(void) {
-    if(is_num_word_on) 
+    if(is_num_word_on)
     {
         return;
     }
@@ -151,7 +169,7 @@ void enable_num_word(void) {
 }
 
 void disable_num_word(void) {
-    if(!is_num_word_on) 
+    if(!is_num_word_on)
     {
         return;
     }
@@ -272,16 +290,18 @@ const uint16_t PROGMEM ctrlR_combo[]  = {KC_Q, KC_R, COMBO_END};
 const uint16_t PROGMEM ctrlP_combo[]  = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
-const uint16_t PROGMEM apostropheCombo[] = {KC_U, KC_Y, COMBO_END};
-const uint16_t PROGMEM deleteCombo[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM altCombo[] = {KC_LCTL, KC_LSFT, COMBO_END};
+const uint16_t PROGMEM apostrophe_combo[] = {KC_U, KC_Y, COMBO_END};
+const uint16_t PROGMEM delete_combo[] = {KC_Q, KC_W, COMBO_END};
+const uint16_t PROGMEM alt_combo[] = {KC_LCTL, KC_LSFT, COMBO_END};
+const uint16_t PROGMEM capsWord_combo[] = {KC_T, KC_N, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(ctrlR_combo, RCTL(KC_R)),
     COMBO(ctrlP_combo, LCTL(KC_P)),
     COMBO(altDot_combo, LALT(KC_DOT)),
     COMBO(ctrlShiftV_combo, LSFT(LCTL(KC_V))),
-    COMBO(apostropheCombo, KC_QUOTE),
-    COMBO(deleteCombo, KC_DEL),
-    COMBO(altCombo, OSM(MOD_LALT)),
+    COMBO(apostrophe_combo, KC_QUOTE),
+    COMBO(delete_combo, KC_DEL),
+    COMBO(alt_combo, OSM(MOD_LALT)),
+    COMBO_ACTION(capsWord_combo),
 };
