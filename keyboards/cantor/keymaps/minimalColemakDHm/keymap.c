@@ -7,7 +7,7 @@
 
 #define _DEFAULT 0
 #define _SYMBOL 1
-#define _DIGITS 2
+#define _NAVIGATION 2
 #define _NUMWORD 3
 #define _I3 4
 
@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         LT(_I3, KC_NO), LT(_DIGITS, KC_SPC), KC_BSPC,      KC_TAB, LT(_SYMBOL, KC_ENT), MT(MOD_RALT, KC_ESC)),
+         LT(_I3, KC_NO), KC_SPC, LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL, KC_ENT), MT(MOD_RALT, KC_ESC)),
   [_SYMBOL] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
       KC_TRANSPARENT, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRANSPARENT,
       KC_TRANSPARENT, KC_TRANSPARENT, KC_X, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_COMM, KC_DOT, KC_TRANSPARENT, KC_TRANSPARENT,
       DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
-  [_DIGITS] = LAYOUT_split_3x6_3(
+  [_NAVIGATION] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
        * │   │ F1│ F2│ F3│ F4│ F5│       │ F6│ F7│ F8│ F9│F10│F11│
