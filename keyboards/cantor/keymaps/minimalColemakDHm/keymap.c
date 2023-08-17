@@ -151,6 +151,20 @@ bool get_combo_must_tap(uint16_t index,combo_t *combo) {
     return true;
 }
 
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
+{
+    switch (keycode) {
+        case HOME_A:
+        case HOME_O:
+            return 400;
+        case HOME_I:
+        case HOME_R:
+            return 300;
+        default:
+            return TAPPING_TERM;
+    }
+}
+
 void process_combo_event(uint16_t combo_index, bool pressed) {
     if(combo_index == capsWord) {
         if(pressed) {
