@@ -6,10 +6,11 @@
 #include "features/achordion.h"
 
 #define _DEFAULT 0
-#define _SYMBOL 1
-#define _NAVIGATION 2
-#define _NUMWORD 3
-#define _I3 4
+#define _SYMBOL_LEFT 1
+#define _SYMBOL_RIGHT 2
+#define _NAVIGATION 3
+#define _NUMWORD 4
+#define _I3 5
 
 // Left-hand home row mods
 #define HOME_A LGUI_T(KC_A)
@@ -64,15 +65,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         LT(_I3, KC_NO), KC_SPC, LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL, KC_ENT), MT(MOD_RALT, KC_ESC)),
-  [_SYMBOL] = LAYOUT_split_3x6_3(
+         LT(_I3, KC_NO), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_RALT, KC_ESC)),
+  [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │ $ │ { │ } │ " │   │       │   │ ! │ _ │ @ │   │   │
+       * │   │   │   │   │   │   │       │   │ ! │ _ │ @ │   │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ # │ ( │ ) │ ; │ ~ │       │ * │ = │ | │ + │ - │   │
+       * │   │ 6 │ 4 │ 0 │ 2 │   │       │ * │ = │ | │ + │ - │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ % │ [ │ ] │ ^ │ \ │       │ & │ ' │ < │ > │ ? │   │
+       * │   │   │   │   │ 8 │   │       │ & │ ' │ < │ > │ ? │   │
+       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
+       *               ┌───┐                   ┌───┐
+       *               │   ├───┐           ┌───┤   │
+       *               └───┤   ├───┐   ┌───┤   ├───┘
+       *                   └───┤   │   │   ├───┘
+       *                       └───┘   └───┘
+       */
+                   KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO,   KC_EXLM, KC_UNDS, KC_AT, KC_NO, KC_NO,
+                   KC_NO, KC_6, KC_4, KC_0, KC_2, KC_NO,            KC_ASTR, KC_EQUAL, KC_PIPE, KC_PLUS, KC_MINUS, KC_NO,
+                   KC_NO, KC_NO, KC_NO, KC_NO, KC_8, KC_NO,         KC_AMPR, KC_GRAVE, KC_LABK, KC_RABK, KC_QUES, KC_NO,
+                                          KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO),
+  [_SYMBOL_RIGHT] = LAYOUT_split_3x6_3(
+      /*
+       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
+       * │   │ $ │ { │ } │ " │   │       │   │   │   │   │   │   │
+       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
+       * │   │ # │ ( │ ) │ ; │ ~ │       │   │ 3 │ 1 │ 5 │ 7 │   │
+       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
+       * │   │ % │ [ │ ] │ ^ │ \ │       │   │ 9 │   │   │   │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
        *               │   ├───┐           ┌───┤   │
@@ -80,9 +100,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                   └───┤Del│   │   ├───┘
        *                       └───┘   └───┘
        */
-                   KC_NO, KC_DLR,  KC_LCBR, KC_RCBR, KC_DQUO, KC_PIPE,    KC_NO,   KC_EXLM, KC_UNDS, KC_AT, KC_NO, KC_NO,
-                   KC_NO, KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_TILD,    KC_ASTR, KC_EQUAL, KC_PIPE, KC_PLUS, KC_MINUS, KC_NO,
-                   KC_NO, KC_PERC, KC_LBRC, KC_RBRC, KC_CIRC, KC_BSLS,    KC_AMPR, KC_GRAVE, KC_LABK, KC_RABK, KC_QUES, KC_NO,
+                   KC_NO, KC_DLR,  KC_LCBR, KC_RCBR, KC_DQUO, KC_PIPE,    KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
+                   KC_NO, KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_TILD,    KC_NO, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
+                   KC_NO, KC_PERC, KC_LBRC, KC_RBRC, KC_CIRC, KC_BSLS,    KC_NO, KC_9, KC_NO, KC_NO, KC_NO, KC_NO,
                                                 KC_NO, KC_NO, KC_DEL,     KC_NO, KC_NO, KC_NO),
 
   [_NUMWORD] = LAYOUT_split_3x6_3(
@@ -101,7 +121,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                       └───┘   └───┘
        */
       QK_BOOT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_RBT,
-      KC_TRANSPARENT, KC_6, KC_4, KC_0, KC_2, KC_NO, KC_NO, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
+      KC_TRANSPARENT, KC_6, KC_4, KC_0, KC_2, KC_TRANSPARENT, KC_TRANSPARENT, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
       KC_TRANSPARENT, KC_TRANSPARENT, KC_X, KC_TRANSPARENT, KC_8, KC_TRANSPARENT, KC_TRANSPARENT, KC_9, KC_COMM, KC_DOT, KC_TRANSPARENT, KC_TRANSPARENT,
       DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
   [_NAVIGATION] = LAYOUT_split_3x6_3(
@@ -121,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        */
       KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
       KC_LSFT, KC_X, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F12,
-      KC_LCTL, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_RCTL,
+      KC_LCTL, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_RCTL,
       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_RALT),
   [_I3] = LAYOUT_split_3x6_3(
       /*
