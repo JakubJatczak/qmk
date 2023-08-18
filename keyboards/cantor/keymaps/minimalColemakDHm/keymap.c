@@ -42,6 +42,7 @@ enum combos {
     delete,
     alt,
     capsWord,
+    numWord,
 };
 
 
@@ -165,14 +166,6 @@ uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
     }
 }
 
-void process_combo_event(uint16_t combo_index, bool pressed) {
-    if(combo_index == capsWord) {
-        if(pressed) {
-            caps_word_on();
-        }
-    }
-}
-
 void enable_num_word(void) {
     if(is_num_word_on)
     {
@@ -251,6 +244,20 @@ bool process_record_num_word(uint16_t keycode, const keyrecord_t *record) {
     return true;
 }
 
+void process_combo_event(uint16_t combo_index, bool pressed) {
+    switch(combo_index) {
+        case capsWord:
+            if(pressed) {
+                caps_word_on();
+            }
+            break;
+        case numWord:
+           if(pressed) {
+                enable_num_word();
+            }
+    }
+}
+
 bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record)
 {
     switch(tap_hold_keycode)
@@ -308,6 +315,7 @@ const uint16_t PROGMEM apostrophe_combo[] = {KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM delete_combo[] = {KC_Q, KC_W, COMBO_END};
 const uint16_t PROGMEM alt_combo[] = {KC_LCTL, KC_LSFT, COMBO_END};
 const uint16_t PROGMEM capsWord_combo[] = {KC_T, KC_N, COMBO_END};
+const uint16_t PROGMEM numWord_combo[] = {KC_D, KC_H, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(ctrlR_combo, RCTL(KC_R)),
@@ -318,4 +326,5 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(delete_combo, KC_DEL),
     COMBO(alt_combo, OSM(MOD_LALT)),
     COMBO_ACTION(capsWord_combo),
+    COMBO_ACTION(numWord_combo),
 };
