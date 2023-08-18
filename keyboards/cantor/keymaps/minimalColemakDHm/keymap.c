@@ -90,9 +90,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
        * │BOT│   │   │   │   │   │       │   │   │   │   │   │RST│
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ 1 │ 2 │ 3 │ 4 │ 5 │       │ 6 │ 7 │ 8 │ 9 │ 0 │   │
+       * │   │ 6 │ 4 │ 0 │ 2 │   │       │   │ 3 │ 1 │ 5 │ 7 │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │   │ x │   │   │   │       │   │   │ , │ . │   │   │
+       * │   │   │ x │   │ 8 │   │       │   │ 9 │ , │ . │   │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
        *               │DEF├───┐           ┌───┤   │
@@ -101,8 +101,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                       └───┘   └───┘
        */
       QK_BOOT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_RBT,
-      KC_TRANSPARENT, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_TRANSPARENT,
-      KC_TRANSPARENT, KC_TRANSPARENT, KC_X, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_COMM, KC_DOT, KC_TRANSPARENT, KC_TRANSPARENT,
+      KC_TRANSPARENT, KC_6, KC_4, KC_0, KC_2, KC_NO, KC_NO, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
+      KC_TRANSPARENT, KC_TRANSPARENT, KC_X, KC_TRANSPARENT, KC_8, KC_TRANSPARENT, KC_TRANSPARENT, KC_9, KC_COMM, KC_DOT, KC_TRANSPARENT, KC_TRANSPARENT,
       DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
   [_NAVIGATION] = LAYOUT_split_3x6_3(
       /*
