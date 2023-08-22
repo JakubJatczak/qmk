@@ -63,7 +63,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         LT(_I3, KC_NO), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_LALT, KC_ESC)),
+         MO(_I3), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_LALT, KC_ESC)),
   [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
@@ -307,13 +307,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     if(!process_achordion(keycode, record)) {
         return false;
     }
-    switch(keycode) {
-        case LT(_I3, KC_NO):
-            if(record->tap.count && record->event.pressed) {
-                enable_num_word();
-                return false;
-            }
-    }
+
     // returns true if the QMK should handle the keycode normally and false if it is already handled
     if (!process_record_num_word(keycode, record)) {
         return false;
