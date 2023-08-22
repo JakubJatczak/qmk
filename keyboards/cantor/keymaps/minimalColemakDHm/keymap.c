@@ -14,7 +14,7 @@
 
 // Left-hand home row mods
 #define HOME_A LGUI_T(KC_A)
-#define HOME_R LALT_T(KC_R)
+#define HOME_R RALT_T(KC_R)
 #define HOME_S LCTL_T(KC_S)
 #define HOME_T LSFT_T(KC_T)
 // #define HOME_W RALT_T(KC_W)
@@ -22,7 +22,7 @@
 // Right-hand home row mods
 #define HOME_N RSFT_T(KC_N)
 #define HOME_E RCTL_T(KC_E)
-#define HOME_I LALT_T(KC_I)
+#define HOME_I RALT_T(KC_I)
 #define HOME_O RGUI_T(KC_O)
 // #define HOME_Y RALT_T(KC_Y)
 
@@ -65,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         LT(_I3, KC_NO), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_RALT, KC_ESC)),
+         LT(_I3, KC_NO), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_LALT, KC_ESC)),
   [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
