@@ -35,8 +35,6 @@ enum userspace_custom_keycodes {
 };
 
 enum combos {
-    CtrlR,
-    CtrlP,
     AltDot,
     ctrlShiftV,
     apostrophe,
@@ -131,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
        * │Shf│   │   │   │   │   │       │   │ ← │ ↓ │ ↑ │ → │F12│
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │Ctl│ 1 │ 2 │ 3 │ 4 │ 5 │       │ 6 │ 7 │ 8 │ 9 │ 0 │Ctl│
+       * │Ctl│   │   │   │   │   │       │   │   │   │   │   │Ctl│
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
        *               │   ├───┐           ┌───┤Alt│
@@ -327,8 +325,6 @@ void matrix_scan_user(void) {
   achordion_task();
 }
 
-const uint16_t PROGMEM ctrlR_combo[]  = {KC_Q, KC_R, COMBO_END};
-const uint16_t PROGMEM ctrlP_combo[]  = {KC_Q, KC_P, COMBO_END};
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
 const uint16_t PROGMEM apostrophe_combo[] = {KC_U, KC_Y, COMBO_END};
@@ -338,8 +334,6 @@ const uint16_t PROGMEM capsWord_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM numWord_combo[] = {KC_D, KC_H, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
-    COMBO(ctrlR_combo, RCTL(KC_R)),
-    COMBO(ctrlP_combo, LCTL(KC_P)),
     COMBO(altDot_combo, LALT(KC_DOT)),
     COMBO(ctrlShiftV_combo, LSFT(LCTL(KC_V))),
     COMBO(apostrophe_combo, KC_QUOTE),
