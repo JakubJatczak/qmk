@@ -318,6 +318,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
 
+    // This is just a hack to avoid problems with weak mod not being released when rolling ");"
+    if(keycode == KC_RPRN)
+    {
+        if(record->event.pressed)
+        {
+            SEND_STRING(")");
+        }
+        return false;
+    }
+    else if(keycode == KC_PIPE)
+    {
+        if(record->event.pressed)
+        {
+            SEND_STRING("|");
+        }
+        return false;
+    }
+
     // returns true if the QMK should handle the keycode normally and false if it is already handled
     if (!process_record_num_word(keycode, record)) {
         return false;
