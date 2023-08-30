@@ -31,17 +31,22 @@ static uint16_t num_word_timer = 0;
 static bool is_num_word_on = false;
 
 enum userspace_custom_keycodes {
-    NUMWORD,
+    NUMWORD=SAFE_RANGE,
+    NC_0,    // empty keycodes to be able to add macro on unused keys
+    NC_1,
+    NC_2,
 };
 
 enum combos {
     AltDot,
-    ctrlShiftV,
     apostrophe,
     delete,
-    alt,
     capsWord,
     numWord,
+    bootloader,
+    reset,
+    f11,
+    f12,
 };
 
 
@@ -55,7 +60,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * │   │ Z │ X │ C │ D │ V │       │ K │ H │ , │ . │ / │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
-       *               │GUI├───┐           ┌───┤AlG│
+       *               │GUI├───┐           ┌───┤Alt│
        *               └───┤Spc├───┐   ┌───┤Ent├───┘
        *                   └───┤Bsp│   │Tab├───┘
        *                       └───┘   └───┘
@@ -63,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         MO(_I3), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_LALT, KC_ESC)),
+         LM(_I3, MOD_LGUI), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_LALT, KC_ESC)),
   [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
@@ -106,30 +111,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
   [_NUMWORD] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │BOT│   │   │   │   │   │       │   │   │   │   │   │RST│
+       * │   │   │   │   │   │   │       │   │   │   │   │   │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
        * │   │ 6 │ 4 │ 0 │ 2 │   │       │   │ 3 │ 1 │ 5 │ 7 │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
        * │   │   │ x │   │ 8 │   │       │   │ 9 │ , │ . │   │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
-       *               │DEF├───┐           ┌───┤   │
+       *               │DEF├───┐           ┌───┤DEF│
        *               └───┤   ├───┐   ┌───┤   ├───┘
        *                   └───┤   │   │   ├───┘
        *                       └───┘   └───┘
        */
-      QK_BOOT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_RBT,
+      QK_BOOT, NC_0, KC_TRANSPARENT, KC_TRANSPARENT, NC_1, NC_2, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_RBT,
       KC_TRANSPARENT, KC_6, KC_4, KC_0, KC_2, KC_TRANSPARENT, KC_TRANSPARENT, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
       KC_TRANSPARENT, KC_TRANSPARENT, KC_X, KC_TRANSPARENT, KC_8, KC_TRANSPARENT, KC_TRANSPARENT, KC_9, KC_COMM, KC_DOT, KC_TRANSPARENT, KC_TRANSPARENT,
-      DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT),
+      DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, DF(_DEFAULT)),
   [_NAVIGATION] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │ F1│ F2│ F3│ F4│ F5│       │ F6│ F7│ F8│ F9│F10│F11│
+       * │   │ F1│ F2│ F3│ F4│ F5│       │ F6│ F7│ F8│ F9│F10│   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │Shf│   │   │   │   │   │       │   │ ← │ ↓ │ ↑ │ → │F12│
+       * │   │   │   │   │Ctr│   │       │   │ ← │ ↓ │ ↑ │ → │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │Ctl│   │   │   │   │   │       │   │   │   │   │   │Ctl│
+       * │   │   │   │   │   │   │       │   │   │   │   │   │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
        *               │   ├───┐           ┌───┤Alt│
@@ -137,16 +142,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                   └───┤   │   │   ├───┘
        *                       └───┘   └───┘
        */
-      KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11,
-      KC_LSFT, KC_X, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_F12,
-      KC_LCTL, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_RCTL,
+      KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
+      KC_NO, KC_X, KC_NO, KC_NO, KC_LCTL, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO,
+      KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_RALT),
   [_I3] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │Pus│ 1 │ 2 │ 3 │ 4 │ 0 │       │ F6│ F7│ F8│ F9│F10│F11│
+       * │Pus│ 1 │ 2 │ 3 │ 4 │ 0 │       │ F6│ F7│ F8│ F9│F10│   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ A │ R │ F │ T │Sh=│       │ F1│ ← │ ↓ │ ↑ │ → │F12│
+       * │   │ A │ R │ F │ T │Sh=│       │ F1│ ← │ ↓ │ ↑ │ → │   │
        * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
        * │ShQ│   │   │   │   │Sh │       │   │ / │ = │ - │ \ │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
@@ -156,9 +161,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                   └───┤   │   │Ent├───┘
        *                       └───┘   └───┘
        */
-      LGUI(KC_BRK) , LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_0), LGUI(KC_F6), LGUI(KC_F7), LGUI(KC_F8), LGUI(KC_F9), LGUI(KC_F10), LGUI(KC_F11),
-      KC_NO, LGUI(KC_A), LGUI(KC_R), LGUI(KC_F), MT((MOD_RSFT), LGUI(KC_T)), LGUI(RSFT(KC_EQUAL)), LGUI(KC_F1), LGUI(KC_LEFT), LGUI(KC_DOWN), LGUI(KC_UP), LGUI(KC_RIGHT), LGUI(KC_F12),
-      LGUI(RSFT(KC_Q)), LGUI(KC_X), KC_NO, KC_NO, KC_NO, LGUI(RSFT(KC_SPC)), KC_NO, LGUI(KC_SLASH), LGUI(KC_EQUAL), LGUI(KC_MINUS), LGUI(KC_BSLS), KC_NO, KC_NO, KC_NO, KC_NO, LGUI(KC_ENT), LGUI(KC_SPC), LGUI(KC_ESC)
+      KC_BRK , KC_1, KC_2, KC_3, KC_4, KC_0, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
+      KC_NO, KC_A, KC_R, KC_F, MT((MOD_RSFT), KC_T), RSFT(KC_EQUAL), KC_F1, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO,
+      RSFT(KC_Q), KC_X, KC_NO, KC_NO, KC_NO, RSFT(KC_SPC), KC_NO, KC_SLASH, KC_EQUAL, KC_MINUS, KC_BSLS, KC_NO,
+      KC_NO, KC_NO, KC_NO, KC_ENT, KC_SPC, KC_ESC
 )};
 
 __attribute__ ((weak))
@@ -296,19 +302,11 @@ bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, ui
         case HOME_R:
         case HOME_S:
         case HOME_T:
-        // case HOME_W:
         case HOME_N:
         case HOME_E:
         case HOME_I:
         case HOME_O:
             break;
-        // case HOME_Y:
-            // special case for the apostropheCombo
-            // if(other_keycode == KC_U)
-            // {
-            //     return false;
-            // }
-            // break;
         default:
             return true;
     }
@@ -332,19 +330,23 @@ void matrix_scan_user(void) {
 }
 
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
-const uint16_t PROGMEM ctrlShiftV_combo[] = {KC_X, KC_D, COMBO_END};
 const uint16_t PROGMEM apostrophe_combo[] = {KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM delete_combo[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM alt_combo[] = {KC_LCTL, KC_LSFT, COMBO_END};
 const uint16_t PROGMEM capsWord_combo[] = {KC_T, KC_N, COMBO_END};
 const uint16_t PROGMEM numWord_combo[] = {KC_D, KC_H, COMBO_END};
+const uint16_t PROGMEM bootloader_combo[]  = {NC_0, NC_1, COMBO_END};
+const uint16_t PROGMEM reset_combo[]  = {NC_0, NC_2, COMBO_END};
+const uint16_t PROGMEM f11_combo[] = {KC_F7, KC_F8, COMBO_END};
+const uint16_t PROGMEM f12_combo[] = {KC_F8, KC_F9, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
-    COMBO(ctrlShiftV_combo, LSFT(LCTL(KC_V))),
     COMBO(apostrophe_combo, KC_QUOTE),
     COMBO(delete_combo, KC_DEL),
-    COMBO(alt_combo, OSM(MOD_LALT)),
     COMBO_ACTION(capsWord_combo),
     COMBO_ACTION(numWord_combo),
+    COMBO(bootloader_combo, QK_BOOT),
+    COMBO(reset_combo, QK_REBOOT),
+    COMBO(f11_combo, KC_F11),
+    COMBO(f12_combo, KC_F12),
 };
