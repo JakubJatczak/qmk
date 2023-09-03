@@ -13,7 +13,7 @@
 #define _I3 5
 
 // Left-hand home row mods
-#define HOME_A LGUI_T(KC_A)
+#define HOME_A KC_A
 #define HOME_R RALT_T(KC_R)
 #define HOME_S LCTL_T(KC_S)
 #define HOME_T LSFT_T(KC_T)
@@ -23,7 +23,7 @@
 #define HOME_N RSFT_T(KC_N)
 #define HOME_E RCTL_T(KC_E)
 #define HOME_I RALT_T(KC_I)
-#define HOME_O RGUI_T(KC_O)
+#define HOME_O KC_O
 // #define HOME_Y RALT_T(KC_Y)
 
 
@@ -176,20 +176,6 @@ bool get_combo_must_tap(uint16_t index,combo_t *combo) {
     return true;
 }
 
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record)
-{
-    switch (keycode) {
-        case HOME_A:
-        case HOME_O:
-            return 400;
-        case HOME_I:
-        case HOME_R:
-            return 300;
-        default:
-            return TAPPING_TERM;
-    }
-}
-
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record)
 {
     switch (keycode)
@@ -298,14 +284,12 @@ bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, ui
 {
     switch(tap_hold_keycode)
     {
-        case HOME_A:
         case HOME_R:
         case HOME_S:
         case HOME_T:
         case HOME_N:
         case HOME_E:
         case HOME_I:
-        case HOME_O:
             break;
         default:
             return true;
