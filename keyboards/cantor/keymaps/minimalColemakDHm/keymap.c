@@ -176,18 +176,6 @@ bool get_combo_must_tap(uint16_t index,combo_t *combo) {
     return true;
 }
 
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t *record)
-{
-    switch (keycode)
-    {
-        case LT(_SYMBOL_LEFT, KC_SPC):
-        case LT(_SYMBOL_RIGHT, KC_ENT):
-            return 0;
-        default:
-            return QUICK_TAP_TERM;
-        }
-}
-
 void enable_num_word(void) {
     if(is_num_word_on)
     {

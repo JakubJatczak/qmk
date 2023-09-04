@@ -7,8 +7,7 @@
 #undef TAPPING_TERM
 // Tap-hold configuration for home row mods.
 #define TAPPING_TERM 170
-#define QUICK_TAP_TERM 120
-#define QUICK_TAP_TERM_PER_KEY
+#define QUICK_TAP_TERM 0
 #define PERMISSIVE_HOLD
 #define COMBO_COUNT 9
 
