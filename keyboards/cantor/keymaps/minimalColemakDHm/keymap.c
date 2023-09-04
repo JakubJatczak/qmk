@@ -334,7 +334,7 @@ void matrix_scan_user(void) {
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
 const uint16_t PROGMEM apostrophe_combo[] = {KC_U, KC_Y, COMBO_END};
 const uint16_t PROGMEM delete_combo[] = {KC_Q, KC_W, COMBO_END};
-const uint16_t PROGMEM capsWord_combo[] = {KC_T, KC_N, COMBO_END};
+const uint16_t PROGMEM capsWord_combo[] = {KC_G, KC_M, COMBO_END};
 const uint16_t PROGMEM numWord_combo[] = {KC_D, KC_H, COMBO_END};
 const uint16_t PROGMEM bootloader_combo[]  = {NC_0, NC_1, COMBO_END};
 const uint16_t PROGMEM reset_combo[]  = {NC_0, NC_2, COMBO_END};
