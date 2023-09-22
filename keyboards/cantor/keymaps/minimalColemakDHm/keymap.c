@@ -17,14 +17,18 @@
 #define HOME_R RALT_T(KC_R)
 #define HOME_S LCTL_T(KC_S)
 #define HOME_T LSFT_T(KC_T)
-// #define HOME_W RALT_T(KC_W)
 
 // Right-hand home row mods
 #define HOME_N RSFT_T(KC_N)
 #define HOME_E RCTL_T(KC_E)
 #define HOME_I RALT_T(KC_I)
 #define HOME_O KC_O
-// #define HOME_Y RALT_T(KC_Y)
+
+// Defined to be used in macros
+#define I3_1 RGUI(KC_1)
+#define I3_2 RGUI(KC_2)
+#define I3_F9 RGUI(KC_F9)
+#define I3_F10 RGUI(KC_F10)
 
 
 static uint16_t num_word_timer = 0;
@@ -161,10 +165,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *                   └───┤   │   │Ent├───┘
        *                       └───┘   └───┘
        */
-      KC_BRK , KC_1, KC_2, KC_3, KC_4, KC_0, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
-      KC_NO, KC_A, KC_R, KC_F, MT((MOD_RSFT), KC_T), RSFT(KC_EQUAL), KC_F1, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO,
-      RSFT(KC_Q), KC_X, KC_NO, KC_NO, KC_NO, RSFT(KC_SPC), KC_NO, KC_SLASH, KC_EQUAL, KC_MINUS, KC_BSLS, KC_NO,
-      KC_NO, KC_NO, KC_NO, KC_ENT, KC_SPC, KC_ESC
+       RGUI(KC_BRK) , I3_1 , I3_2 , RGUI(KC_3) , RGUI(KC_4) , RGUI(KC_0) , RGUI(KC_F6) , RGUI(KC_F7) , RGUI(KC_F8) , I3_F9 , I3_F10 , KC_NO ,
+       KC_NO , RGUI(KC_A), RGUI(KC_R), RGUI(KC_F) , MT((MOD_RSFT), RGUI(KC_T)) , RSFT(RGUI(KC_EQUAL)), RGUI(KC_F1) , RGUI(KC_LEFT) , RGUI(KC_DOWN) , RGUI(KC_UP) , RGUI(KC_RIGHT), KC_NO,
+       RSFT(RGUI(KC_Q)), KC_NO , KC_NO , KC_NO , KC_NO , RSFT(RGUI(KC_SPC)), KC_NO , RGUI(KC_SLASH), RGUI(KC_EQUAL), RGUI(KC_MINUS), RGUI(KC_BSLS), KC_NO ,
+       KC_NO , KC_NO , KC_NO , RGUI(KC_ENT), RGUI(KC_SPC) , RGUI(KC_ESC)
 )};
 
 __attribute__ ((weak))
