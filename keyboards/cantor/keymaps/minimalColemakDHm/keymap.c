@@ -27,7 +27,7 @@
 // Defined to be used in macros
 #define I3_1 RGUI(KC_1)
 #define I3_2 RGUI(KC_2)
-#define I3_F9 RGUI(KC_F9)
+#define I3_F8 RGUI(KC_F8)
 #define I3_F10 RGUI(KC_F10)
 
 
@@ -51,6 +51,8 @@ enum combos {
     reset,
     f11,
     f12,
+    i3_exit,
+    i3_pause,
 };
 
 
@@ -160,15 +162,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * │ShQ│   │   │   │   │Sh │       │   │ / │ = │ - │ \ │   │
        * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
        *               ┌───┐                   ┌───┐
-       *               │   ├───┐           ┌───┤Esc│
-       *               └───┤   ├───┐   ┌───┤Spc├───┘
-       *                   └───┤   │   │Ent├───┘
+       *               │Esc├───┐           ┌───┤   │
+       *               └───┤Spc├───┐   ┌───┤   ├───┘
+       *                   └───┤Ent│   │   ├───┘
        *                       └───┘   └───┘
        */
-       RGUI(KC_BRK) , I3_1 , I3_2 , RGUI(KC_3) , RGUI(KC_4) , RGUI(KC_0) , RGUI(KC_F6) , RGUI(KC_F7) , RGUI(KC_F8) , I3_F9 , I3_F10 , KC_NO ,
+       RGUI(KC_BRK) , I3_1 , I3_2 , RGUI(KC_3) , RGUI(KC_4) , RGUI(KC_0) , RGUI(KC_F6) , RGUI(KC_F7) , I3_F8 , RGUI(KC_F9) , I3_F10 , KC_NO ,
        KC_NO , RGUI(KC_A), RGUI(KC_R), RGUI(KC_F) , MT((MOD_RSFT), RGUI(KC_T)) , RSFT(RGUI(KC_EQUAL)), RGUI(KC_F1) , RGUI(KC_LEFT) , RGUI(KC_DOWN) , RGUI(KC_UP) , RGUI(KC_RIGHT), KC_NO,
        RSFT(RGUI(KC_Q)), KC_NO , KC_NO , KC_NO , KC_NO , RSFT(RGUI(KC_SPC)), KC_NO , RGUI(KC_SLASH), RGUI(KC_EQUAL), RGUI(KC_MINUS), RGUI(KC_BSLS), KC_NO ,
-       KC_NO , KC_NO , KC_NO , RGUI(KC_ENT), RGUI(KC_SPC) , RGUI(KC_ESC)
+       RGUI(KC_ESC), RGUI(KC_SPC), RGUI(KC_ENT), KC_NO , KC_NO , KC_NO
 )};
 
 __attribute__ ((weak))
@@ -259,16 +261,24 @@ bool process_record_num_word(uint16_t keycode, const keyrecord_t *record) {
 }
 
 void process_combo_event(uint16_t combo_index, bool pressed) {
-    switch(combo_index) {
-        case capsWord:
-            if(pressed) {
+    if(pressed) {
+        switch(combo_index) {
+            case capsWord:
                 caps_word_on();
-            }
-            break;
-        case numWord:
-           if(pressed) {
+                break;
+            case numWord:
                 enable_num_word();
-            }
+                break;
+            case i3_exit:
+                SEND_STRING(SS_DOWN(X_RGUI) SS_DOWN(X_RSFT) SS_TAP(X_Q) SS_UP(X_RSFT) SS_UP(X_RGUI));
+                break;
+            case i3_pause:
+                SEND_STRING(SS_DOWN(X_RGUI) SS_TAP(X_BRK) SS_UP(X_RGUI));
+                break;
+            default:
+                // normal combo - no need to take any action
+                return;
+        }
     }
 }
 
@@ -332,6 +342,8 @@ const uint16_t PROGMEM bootloader_combo[]  = {NC_0, NC_1, COMBO_END};
 const uint16_t PROGMEM reset_combo[]  = {NC_0, NC_2, COMBO_END};
 const uint16_t PROGMEM f11_combo[] = {KC_F7, KC_F8, COMBO_END};
 const uint16_t PROGMEM f12_combo[] = {KC_F8, KC_F9, COMBO_END};
+const uint16_t PROGMEM i3_exit_combo[] = {I3_1, I3_2, COMBO_END};
+const uint16_t PROGMEM i3_pause_combo[] = {I3_F10, I3_F8, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
@@ -343,4 +355,6 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(reset_combo, QK_REBOOT),
     COMBO(f11_combo, KC_F11),
     COMBO(f12_combo, KC_F12),
+    COMBO_ACTION(i3_exit_combo),
+    COMBO_ACTION(i3_pause_combo),
 };
