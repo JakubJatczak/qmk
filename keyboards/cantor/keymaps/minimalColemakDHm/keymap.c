@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         LM(_I3, MOD_LGUI), LT(_SYMBOL_LEFT,KC_SPC), LT(_NAVIGATION, KC_BSPC),      KC_TAB, LT(_SYMBOL_RIGHT, KC_ENT), MT(MOD_LALT, KC_ESC)),
+         KC_RGUI, LT(_NAVIGATION, KC_BSPC), LT(_SYMBOL_LEFT,KC_SPC),      LT(_SYMBOL_RIGHT, KC_ENT), LT(_I3, KC_TAB), MT(MOD_LALT, KC_ESC)),
   [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
