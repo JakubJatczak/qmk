@@ -3,6 +3,6 @@ From: qmkfm/qmk_cli
 Stage: spython-base
 
 %runscript
-    qmk flash -kb cantor -km minimalColemakDHm
+    qmk flash -kb crkbd -km minimalColemakDHm -e CONVERT_TO=promicro_rp2040
 
 
