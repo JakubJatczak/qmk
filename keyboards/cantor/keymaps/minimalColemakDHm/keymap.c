@@ -53,42 +53,43 @@ enum combos {
     f12,
     i3_exit,
     i3_pause,
+    dollar,
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOUT_split_3x6_3(
       /*
-       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │ Q │ W │ F │ P │ B │       │ J │ L │ U │ Y │ : │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ A │ R │ S │ T │ G │       │ M │ N │ E │ I │ O │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ Z │ X │ C │ D │ V │       │ K │ H │ , │ . │ / │   │
-       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-       *               ┌───┐                   ┌───┐
-       *               │GUI├───┐           ┌───┤Alt│
-       *               └───┤Spc├───┐   ┌───┤Ent├───┘
-       *                   └───┤Bsp│   │Tab├───┘
-       *                       └───┘   └───┘
+       * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+       * │ Q │ W │ F │ P │ B │       │ J │ L │ U │ Y │ : │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ A │ R │ S │ T │ G │       │ M │ N │ E │ I │ O │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ Z │ X │ C │ D │ V │       │ K │ H │ , │ . │ / │
+       * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+       *           ┌───┐                   ┌───┐
+       *           │   ├───┐           ┌───┤Alt│
+       *           └───┤Spc├───┐   ┌───┤Ent├───┘
+       *               └───┤Bsp│   │Tab├───┘
+       *                   └───┘   └───┘
        */
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         KC_RGUI, LT(_NAVIGATION, KC_BSPC), LT(_SYMBOL_LEFT,KC_SPC),      LT(_SYMBOL_RIGHT, KC_ENT), LT(_I3, KC_TAB), MT(MOD_LALT, KC_ESC)),
+         KC_NO, LT(_NAVIGATION, KC_BSPC), LT(_SYMBOL_LEFT,KC_SPC),      LT(_SYMBOL_RIGHT, KC_ENT), LT(_I3, KC_TAB), MT(MOD_LALT, KC_ESC)),
   [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
-       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │   │   │   │   │   │       │   │ ! │ _ │ @ │   │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ 6 │ 4 │ 0 │ 2 │   │       │ * │ = │ | │ + │ - │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │   │   │   │ 8 │   │       │ & │ ' │ < │ > │ ? │   │
-       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-       *               ┌───┐                   ┌───┐
-       *               │   ├───┐           ┌───┤   │
-       *               └───┤   ├───┐   ┌───┤   ├───┘
-       *                   └───┤   │   │   ├───┘
-       *                       └───┘   └───┘
+       * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+       * │   │   │   │   │   │       │   │ ! │ _ │ @ │   │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ 6 │ 4 │ 0 │ 2 │   │       │ * │ = │ | │ + │ - │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │   │   │   │ 8 │   │       │ & │ ' │ < │ > │ ? │
+       * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+       *           ┌───┐                   ┌───┐
+       *           │   ├───┐           ┌───┤   │
+       *           └───┤   ├───┐   ┌───┤   ├───┘
+       *               └───┤   │   │   ├───┘
+       *                   └───┘   └───┘
        */
                    KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO,   KC_EXLM, KC_UNDS, KC_AT, KC_NO, KC_NO,
                    KC_NO, KC_6, KC_4, KC_0, KC_2, KC_NO,            KC_ASTR, KC_EQUAL, KC_PIPE, KC_PLUS, KC_MINUS, KC_NO,
@@ -96,18 +97,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                                           KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO),
   [_SYMBOL_RIGHT] = LAYOUT_split_3x6_3(
       /*
-       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │ $ │ { │ } │ " │   │       │   │   │   │   │   │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ # │ ( │ ) │ ; │ ~ │       │   │ 3 │ 1 │ 5 │ 7 │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ % │ [ │ ] │ ^ │ \ │       │   │ 9 │   │   │   │   │
-       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-       *               ┌───┐                   ┌───┐
-       *               │   ├───┐           ┌───┤   │
-       *               └───┤   ├───┐   ┌───┤   ├───┘
-       *                   └───┤Del│   │   ├───┘
-       *                       └───┘   └───┘
+       * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+       * │ $ │ { │ } │ " │   │       │   │   │   │   │   │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ # │ ( │ ) │ ; │ ~ │       │   │ 3 │ 1 │ 5 │ 7 │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ % │ [ │ ] │ ^ │ \ │       │   │ 9 │   │   │   │
+       * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+       *           ┌───┐                   ┌───┐
+       *           │   ├───┐           ┌───┤   │
+       *           └───┤   ├───┐   ┌───┤   ├───┘
+       *               └───┤Del│   │   ├───┘
+       *                   └───┘   └───┘
        */
                    KC_NO, KC_DLR,  KC_LCBR, KC_RCBR, KC_DQUO, KC_PIPE,    KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                    KC_NO, KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_TILD,    KC_NO, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
@@ -116,37 +117,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
 
   [_NUMWORD] = LAYOUT_split_3x6_3(
       /*
-       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │   │   │   │   │   │       │   │   │   │   │   │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ 6 │ 4 │ 0 │ 2 │   │       │   │ 3 │ 1 │ 5 │ 7 │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │   │ x │   │ 8 │   │       │   │ 9 │ , │ . │   │   │
-       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-       *               ┌───┐                   ┌───┐
-       *               │DEF├───┐           ┌───┤DEF│
-       *               └───┤   ├───┐   ┌───┤   ├───┘
-       *                   └───┤   │   │   ├───┘
-       *                       └───┘   └───┘
+       * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+       * │   │   │   │   │   │       │   │   │   │   │   │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ 6 │ 4 │ 0 │ 2 │   │       │   │ 3 │ 1 │ 5 │ 7 │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │   │ x │   │ 8 │   │       │   │ 9 │ , │ . │   │
+       * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+       *           ┌───┐                   ┌───┐
+       *           │DEF├───┐           ┌───┤DEF│
+       *           └───┤   ├───┐   ┌───┤   ├───┘
+       *               └───┤DEF│   │DEF├───┘
+       *                   └───┘   └───┘
        */
       QK_BOOT, NC_0, KC_TRANSPARENT, KC_TRANSPARENT, NC_1, NC_2, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_RBT,
       KC_TRANSPARENT, KC_6, KC_4, KC_0, KC_2, KC_TRANSPARENT, KC_TRANSPARENT, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
       KC_TRANSPARENT, KC_TRANSPARENT, KC_X, KC_TRANSPARENT, KC_8, KC_TRANSPARENT, KC_TRANSPARENT, KC_9, KC_COMM, KC_DOT, KC_TRANSPARENT, KC_TRANSPARENT,
-      DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, DF(_DEFAULT)),
+      KC_TRANSPARENT, KC_TRANSPARENT, DF(_DEFAULT), DF(_DEFAULT), KC_TRANSPARENT, KC_TRANSPARENT),
   [_NAVIGATION] = LAYOUT_split_3x6_3(
       /*
-       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │   │ F1│ F2│ F3│ F4│ F5│       │ F6│ F7│ F8│ F9│F10│   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │Gui│Alt│Ctl│Sht│   │       │   │ ← │ ↓ │ ↑ │ → │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │   │   │   │   │   │       │   │Hom│PgD│PgU│End│   │
-       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-       *               ┌───┐                   ┌───┐
-       *               │   ├───┐           ┌───┤Alt│
-       *               └───┤   ├───┐   ┌───┤   ├───┘
-       *                   └───┤   │   │   ├───┘
-       *                       └───┘   └───┘
+       * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+       * │ F1│ F2│ F3│ F4│ F5│       │ F6│ F7│ F8│ F9│F10│
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │Gui│Alt│Ctl│Sht│   │       │   │ ← │ ↓ │ ↑ │ → │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │   │   │   │   │   │       │   │Hom│PgD│PgU│End│
+       * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+       *           ┌───┐                   ┌───┐
+       *           │   ├───┐           ┌───┤Alt│
+       *           └───┤   ├───┐   ┌───┤   ├───┘
+       *               └───┤   │   │   ├───┘
+       *                   └───┘   └───┘
        */
       KC_NO, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_NO,
       KC_NO, KC_RGUI, KC_RALT, KC_RCTL,  KC_RSFT, KC_NO, KC_NO, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_NO,
@@ -154,18 +155,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
       KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_RALT),
   [_I3] = LAYOUT_split_3x6_3(
       /*
-       * ┌───┬───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┬───┐
-       * │Pus│ 1 │ 2 │ 3 │ 4 │ 0 │       │ F6│ F7│ F8│ F9│F10│   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │   │ A │ R │ F │ T │Sh=│       │ F1│ ← │ ↓ │ ↑ │ → │   │
-       * ├───┼───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┼───┤
-       * │ShQ│   │   │   │   │Sh │       │   │ / │ = │ - │ \ │   │
-       * └───┴───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┴───┘
-       *               ┌───┐                   ┌───┐
-       *               │Esc├───┐           ┌───┤   │
-       *               └───┤Spc├───┐   ┌───┤   ├───┘
-       *                   └───┤Ent│   │   ├───┘
-       *                       └───┘   └───┘
+       * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
+       * │ 1 │ 2 │ 3 │ 4 │ 0 │       │ F6│ F7│ F8│ F9│F10│
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │ A │ R │ F │ T │Sh=│       │ F1│   │   │   │   │
+       * ├───┼───┼───┼───┼───┤       ├───┼───┼───┼───┼───┤
+       * │   │   │   │   │Sh │       │   │ / │ = │ - │ \ │
+       * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
+       *           ┌───┐                   ┌───┐
+       *           │Esc├───┐           ┌───┤   │
+       *           └───┤Spc├───┐   ┌───┤   ├───┘
+       *               └───┤Ent│   │   ├───┘
+       *                   └───┘   └───┘
        */
        RGUI(KC_BRK) , I3_1 , I3_2 , RGUI(KC_3) , RGUI(KC_4) , RGUI(KC_0) , RGUI(KC_F6) , RGUI(KC_F7) , I3_F8 , RGUI(KC_F9) , I3_F10 , KC_NO ,
        KC_NO , RGUI(KC_A), RGUI(KC_R), RGUI(KC_F) , MT((MOD_RSFT), RGUI(KC_T)) , RSFT(RGUI(KC_EQUAL)), RGUI(KC_F1) , RGUI(KC_LEFT) , RGUI(KC_DOWN) , RGUI(KC_UP) , RGUI(KC_RIGHT), KC_NO,
@@ -344,6 +345,7 @@ const uint16_t PROGMEM f11_combo[] = {KC_F7, KC_F8, COMBO_END};
 const uint16_t PROGMEM f12_combo[] = {KC_F8, KC_F9, COMBO_END};
 const uint16_t PROGMEM i3_exit_combo[] = {I3_1, I3_2, COMBO_END};
 const uint16_t PROGMEM i3_pause_combo[] = {I3_F10, I3_F8, COMBO_END};
+const uint16_t PROGMEM dollar_combo[] = {KC_W, KC_F, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
@@ -357,4 +359,5 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(f12_combo, KC_F12),
     COMBO_ACTION(i3_exit_combo),
     COMBO_ACTION(i3_pause_combo),
+    COMBO(dollar_combo, KC_DLR),
 };
