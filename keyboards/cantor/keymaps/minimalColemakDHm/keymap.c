@@ -59,8 +59,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
        *           ┌───┐                   ┌───┐
        *           │   ├───┐           ┌───┤Alt│
-       *           └───┤Spc├───┐   ┌───┤Ent├───┘
-       *               └───┤Bsp│   │Tab├───┘
+       *           └───┤Bsp├───┐   ┌───┤Tab├───┘
+       *               └───┤Spc│   │Ent├───┘
        *                   └───┘   └───┘
        */
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        *           ┌───┐                   ┌───┐
        *           │   ├───┐           ┌───┤   │
        *           └───┤   ├───┐   ┌───┤   ├───┘
-       *               └───┤   │   │   ├───┘
+       *               └───┤   │   │Ent├───┘
        *                   └───┘   └───┘
        */
                    KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO,   KC_EXLM, KC_UNDS, KC_AT, KC_NO, KC_NO,
@@ -97,14 +97,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
        *           ┌───┐                   ┌───┐
        *           │   ├───┐           ┌───┤   │
-       *           └───┤   ├───┐   ┌───┤   ├───┘
-       *               └───┤Del│   │   ├───┘
+       *           └───┤Del├───┐   ┌───┤   ├───┘
+       *               └───┤Spc│   │   ├───┘
        *                   └───┘   └───┘
        */
                    KC_NO, KC_DLR,  KC_LCBR, KC_RCBR, KC_DQUO, KC_PIPE,    KC_NO,   KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,
                    KC_NO, KC_HASH, KC_LPRN, KC_RPRN, KC_SCLN, KC_TILD,    KC_NO, KC_3, KC_1, KC_5, KC_7, KC_TRANSPARENT,
                    KC_NO, KC_PERC, KC_LBRC, KC_RBRC, KC_CIRC, KC_BSLS,    KC_NO, KC_9, KC_NO, KC_NO, KC_NO, KC_NO,
-                                                KC_NO, KC_NO, KC_DEL,     KC_NO, KC_NO, KC_NO),
+                                                KC_NO, KC_DEL, KC_SPC,    KC_NO, KC_NO, KC_NO),
 
   [_NUMWORD] = LAYOUT_split_3x6_3(
       /*
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
        * │   │ x │   │ 8 │   │       │   │ 9 │ , │ . │   │
        * └───┴───┴───┴───┴───┘       └───┴───┴───┴───┴───┘
        *           ┌───┐                   ┌───┐
-       *           │DEF├───┐           ┌───┤DEF│
+       *           │   ├───┐           ┌───┤   │
        *           └───┤   ├───┐   ┌───┤   ├───┘
        *               └───┤DEF│   │DEF├───┘
        *                   └───┘   └───┘
