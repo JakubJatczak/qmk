@@ -3,7 +3,6 @@
 
 #include QMK_KEYBOARD_H
 #include "keycodes.h"
-#include "features/achordion.h"
 
 #define _DEFAULT 0
 #define _SYMBOL_LEFT 1
@@ -268,28 +267,7 @@ void process_combo_event(uint16_t combo_index, bool pressed) {
     }
 }
 
-bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record)
-{
-    switch(tap_hold_keycode)
-    {
-        case HOME_R:
-        case HOME_S:
-        case HOME_T:
-        case HOME_N:
-        case HOME_E:
-        case HOME_I:
-            break;
-        default:
-            return true;
-    }
-    return achordion_opposite_hands(tap_hold_record, other_record);
-}
-
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if(!process_achordion(keycode, record)) {
-        return false;
-    }
-
     // This is just a hack to avoid problems with weak mod not being released when rolling ");"
     if(keycode == KC_RPRN)
     {
@@ -326,10 +304,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         return false;
     }
     return process_record_user_kb(keycode, record);
-}
-
-void matrix_scan_user(void) {
-  achordion_task();
 }
 
 const uint16_t PROGMEM altDot_combo[] = {KC_COMMA, KC_DOT, COMBO_END};
