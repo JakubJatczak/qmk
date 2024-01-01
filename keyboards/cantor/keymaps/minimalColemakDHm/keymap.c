@@ -44,6 +44,8 @@ enum combos {
     f11,
     f12,
     dollar,
+    symbol_space,
+    symbol_return,
 };
 
 
@@ -316,6 +318,8 @@ const uint16_t PROGMEM reset_combo[]  = {NC_0, NC_2, COMBO_END};
 const uint16_t PROGMEM f11_combo[] = {KC_F7, KC_F8, COMBO_END};
 const uint16_t PROGMEM f12_combo[] = {KC_F8, KC_F9, COMBO_END};
 const uint16_t PROGMEM dollar_combo[] = {KC_W, KC_F, COMBO_END};
+const uint16_t PROGMEM symbol_space_combo[] = {KC_0, KC_4, COMBO_END};
+const uint16_t PROGMEM symbol_return_combo[] = {KC_1, KC_5, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
@@ -328,4 +332,6 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(f11_combo, KC_F11),
     COMBO(f12_combo, KC_F12),
     COMBO(dollar_combo, KC_DLR),
+    COMBO(symbol_space_combo, KC_SPC),
+    COMBO(symbol_return_combo, KC_ENT),
 };
