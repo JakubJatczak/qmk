@@ -46,6 +46,7 @@ enum combos {
     dollar,
     symbol_space,
     symbol_return,
+    backspace,
 };
 
 
@@ -86,7 +87,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_NO,  KC_NO, KC_NO, KC_NO, KC_NO,       KC_NO,   KC_EXLM, KC_UNDS, KC_AT, KC_NO, KC_NO,
                    KC_NO, KC_6, KC_4, KC_0, KC_2, KC_NO,            KC_ASTR, KC_EQUAL, KC_PIPE, KC_PLUS, KC_MINUS, KC_NO,
                    KC_NO, KC_NO, KC_NO, KC_NO, KC_8, KC_NO,         KC_AMPR, KC_GRAVE, KC_LABK, KC_RABK, KC_QUES, KC_NO,
-                                          KC_NO, KC_NO, KC_NO,      KC_NO, KC_NO, KC_NO),
+                                          KC_NO, KC_NO, KC_NO,      KC_ENT, KC_NO, KC_NO),
   [_SYMBOL_RIGHT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
@@ -320,6 +321,7 @@ const uint16_t PROGMEM f12_combo[] = {KC_F8, KC_F9, COMBO_END};
 const uint16_t PROGMEM dollar_combo[] = {KC_W, KC_F, COMBO_END};
 const uint16_t PROGMEM symbol_space_combo[] = {KC_0, KC_4, COMBO_END};
 const uint16_t PROGMEM symbol_return_combo[] = {KC_1, KC_5, COMBO_END};
+const uint16_t PROGMEM backspace_combo[] = {KC_P, KC_B, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
@@ -334,4 +336,5 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(dollar_combo, KC_DLR),
     COMBO(symbol_space_combo, KC_SPC),
     COMBO(symbol_return_combo, KC_ENT),
+    COMBO(backspace_combo, KC_BSPC),
 };
