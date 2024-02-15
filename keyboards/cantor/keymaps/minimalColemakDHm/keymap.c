@@ -31,6 +31,7 @@ enum userspace_custom_keycodes {
     NC_0,    // empty keycodes to be able to add macro on unused keys
     NC_1,
     NC_2,
+    NC_3,
 };
 
 enum combos {
@@ -48,6 +49,7 @@ enum combos {
     symbol_return,
     backspace,
     esc,
+    lock,
 };
 
 
@@ -69,7 +71,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {[_DEFAULT] = LAYOU
                    KC_NO, KC_Q, KC_W, KC_F, KC_P, KC_B,     KC_J, KC_L, KC_U, KC_Y, KC_COLN, KC_NO,
                    KC_NO, HOME_A, HOME_R, HOME_S, HOME_T, KC_G, KC_M, HOME_N, HOME_E, HOME_I, HOME_O, KC_NO,
                    KC_NO, KC_Z, KC_X, KC_C, KC_D, KC_V,     KC_K, KC_H, KC_COMM, KC_DOT, KC_SLSH, KC_NO,
-         KC_NO, LT(_NAVIGATION, KC_BSPC), LT(_SYMBOL_LEFT,KC_SPC),      LT(_SYMBOL_RIGHT, KC_ENT), LT(_I3, KC_TAB), MT(MOD_LALT, KC_ESC)),
+         NC_3, LT(_NAVIGATION, KC_BSPC), LT(_SYMBOL_LEFT,KC_SPC),      LT(_SYMBOL_RIGHT, KC_ENT), LT(_I3, KC_TAB), MT(MOD_LALT, KC_ESC)),
   [_SYMBOL_LEFT] = LAYOUT_split_3x6_3(
       /*
        * ┌───┬───┬───┬───┬───┐       ┌───┬───┬───┬───┬───┐
@@ -324,6 +326,7 @@ const uint16_t PROGMEM symbol_space_combo[] = {KC_0, KC_4, COMBO_END};
 const uint16_t PROGMEM symbol_return_combo[] = {KC_1, KC_5, COMBO_END};
 const uint16_t PROGMEM backspace_combo[] = {KC_P, KC_B, COMBO_END};
 const uint16_t PROGMEM esc_combo[] = {KC_Y, KC_COLN, COMBO_END};
+const uint16_t PROGMEM lock_combo[] = {NC_3, KC_ESC, COMBO_END};
 
 combo_t key_combos[COMBO_COUNT] = {
     COMBO(altDot_combo, LALT(KC_DOT)),
@@ -340,4 +343,5 @@ combo_t key_combos[COMBO_COUNT] = {
     COMBO(symbol_return_combo, KC_ENT),
     COMBO(backspace_combo, KC_BSPC),
     COMBO(esc_combo, KC_ESC),
+    COMBO(lock_combo, RGUI(KC_PAUS)),
 };
